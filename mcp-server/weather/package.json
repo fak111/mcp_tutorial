@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "type": "module",
   "bin": {
-    "@fak111/weather-mcp": "./build/index.js"
+    "weather-mcp": "build/index.js"
   },
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
@@ -31,5 +31,13 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fak111/mcp_tutorial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fak111/mcp_tutorial/issues"
+  },
+  "homepage": "https://github.com/fak111/mcp_tutorial#readme"
 }

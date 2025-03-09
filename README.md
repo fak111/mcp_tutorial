@@ -1,58 +1,105 @@
-# Weather MCP Service
+# MCP Tutorial Project
 
-This is a TypeScript-based weather service MCP (Mission Control Protocol) that provides weather information for different cities.
+This project is a microservices-based application that demonstrates various integrations and functionalities through a Model-Controller-Provider (MCP) architecture.
 
-## Quick Start
+## Project Structure
 
-You can run this MCP service directly using npx:
-
-```bash
-npx @fak111/weather-mcp
+```
+mcp_tutorial/
+├── mcp-client/         # Client-side application
+├── mcp-server/         # Server-side microservices
+│   ├── weather/        # Weather service
+│   └── file/          # File management service
+│       └── src/       # Source code for different integrations
+│           ├── redis/
+│           ├── slack/
+│           ├── gdrive/
+│           ├── github/
+│           ├── gitlab/
+│           ├── memory/
+│           ├── everart/
+│           └── postgres/
+├── dist/               # Compiled distribution files
+└── need/              # Additional resources
 ```
 
-That's it! The service will start automatically and be ready to use with Cursor AI.
+## Features
 
-## Example Usage
+- Weather service integration
+- File management system
+- Multiple storage backend support:
+  - Redis
+  - PostgreSQL
+  - Memory storage
+  - Google Drive
+  - GitHub
+  - GitLab
+  - Slack integration
+- Modern client interface
 
-You can use this MCP to get weather information for various cities through Cursor AI. For example:
+## Prerequisites
 
-```typescript
-// Get weather for New York
-mcp__get_weather({ city: "New York" })
-```
+- Node.js (v14 or higher)
+- npm or yarn
+- Redis (optional)
+- PostgreSQL (optional)
 
-Available cities include:
-- New York
-- London
-- Tokyo
-- Beijing
-
-## Development
-
-If you want to modify the service:
+## Installation
 
 1. Clone the repository:
 ```bash
 git clone https://github.com/fak111/mcp_tutorial.git
+cd mcp_tutorial
 ```
 
-2. Install dependencies:
+2. Install dependencies for each service:
 ```bash
-pnpm install
+# Install client dependencies
+cd mcp-client
+npm install
+
+# Install server dependencies
+cd ../mcp-server
+npm install
 ```
 
-3. Make your changes in the `src` directory
+3. Configure environment variables:
+- Create `.env` files in respective service directories
+- Set up necessary API keys and connection strings
 
-4. Build the project:
+## Running the Application
+
+1. Start the server:
 ```bash
-pnpm build
+cd mcp-server
+npm start
 ```
 
-5. Run locally:
+2. Start the client:
 ```bash
-pnpm start
+cd mcp-client
+npm start
 ```
+
+## Development
+
+- The project uses TypeScript for type safety
+- Each service can be developed and deployed independently
+- Follow the microservices architecture pattern
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Thanks to all contributors
+- Built with modern web technologies and best practices

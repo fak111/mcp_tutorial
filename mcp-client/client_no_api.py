@@ -1,0 +1,91 @@
+import asyncio
+import sys
+from typing import Optional
+from contextlib import AsyncExitStack
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+class MCPClient:
+    def __init__(self):
+        self.session: Optional[ClientSession] = None
+        self.exit_stack = AsyncExitStack()
+
+    async def connect_to_server(self, server_script_path: str):
+        """Connect to MCP server without LLM dependencies"""
+        if not (server_script_path.endswith('.py') or server_script_path.endswith('.js')):
+            raise ValueError("Server script must be a .py or .js file")
+
+        command = "python" if server_script_path.endswith('.py') else "node"
+        server_params = StdioServerParameters(
+            command=command,
+            args=[server_script_path],
+            env=None
+        )
+
+        stdio_transport = await self.exit_stack.enter_async_context(stdio_client(server_params))
+        self.stdio, self.write = stdio_transport
+        self.session = await self.exit_stack.enter_async_context(
+            ClientSession(self.stdio, self.write))
+
+        await self.session.initialize()
+        response = await self.session.list_tools()
+        print("\nConnected to server with tools:", [tool.name for tool in response.tools])
+
+    async def process_query(self, query: str) -> str:
+        """Direct tool execution without LLM mediation"""
+        # Step 1: List available tools
+        tools_response = await self.session.list_tools()
+
+        # Step 2: Direct tool selection (example: first tool)
+        if not tools_response.tools:
+            return "No available tools"
+
+        selected_tool = tools_response.tools[0]
+
+        # Step 3: Execute tool with raw input
+        try:
+            result = await self.session.call_tool(
+                selected_tool.name,
+                {"input": query}  # Pass raw input directly
+            )
+            return f"Tool {selected_tool.name} executed\nResult: {result.content}"
+        except Exception as e:
+            return f"Tool execution failed: {str(e)}"
+
+    async def chat_loop(self):
+        """Interactive command interface"""
+        print("\nMCP Command Client Started!")
+        while True:
+            try:
+                if (cmd := input("\nCommand (tools/exec <tool> <args>/quit): ").lower()) == 'quit':
+                    break
+                elif cmd == 'tools':
+                    response = await self.session.list_tools()
+                    print("\nAvailable tools:", [t.name for t in response.tools])
+                elif cmd.startswith('exec '):
+                    _, tool_name, *args = cmd.split(' ', 2)
+                    result = await self.session.call_tool(tool_name, {"args": args[-1] if args else {}})
+                    print(f"\nTool Result: {result.content}")
+                else:
+                    print("Unknown command")
+            except Exception as e:
+                print(f"Error: {str(e)}")
+
+    async def cleanup(self):
+        await self.exit_stack.aclose()
+
+async def main():
+    if len(sys.argv) < 2:
+        print("Usage: python client.py <path_to_server_script>")
+        sys.exit(1)
+
+    client = MCPClient()
+    try:
+        await client.connect_to_server(sys.argv[1])
+        await client.chat_loop()
+    finally:
+        await client.cleanup()
+
+if __name__ == "__main__":
+    asyncio.run(main())
