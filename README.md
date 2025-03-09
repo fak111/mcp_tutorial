@@ -9,16 +9,7 @@ mcp_tutorial/
 ├── mcp-client/         # Client-side application
 ├── mcp-server/         # Server-side microservices
 │   ├── weather/        # Weather service
-│   └── file/          # File management service
-│       └── src/       # Source code for different integrations
-│           ├── redis/
-│           ├── slack/
-│           ├── gdrive/
-│           ├── github/
-│           ├── gitlab/
-│           ├── memory/
-│           ├── everart/
-│           └── postgres/
+│   └──filesystem/      # File management service
 ├── dist/               # Compiled distribution files
 └── need/              # Additional resources
 ```
@@ -27,14 +18,14 @@ mcp_tutorial/
 
 - Weather service integration
 - File management system
-- Multiple storage backend support:
-  - Redis
-  - PostgreSQL
-  - Memory storage
-  - Google Drive
-  - GitHub
-  - GitLab
-  - Slack integration
+- (ToDo))Multiple storage backend support:
+  - [ ] Redis
+  - [ ] PostgreSQL
+  - [ ] Memory storage
+  - [ ] Google Drive
+  - [ ] GitHub
+  - [ ] GitLab
+  - [ ] Slack integration
 - Modern client interface
 
 ## Prerequisites
@@ -47,12 +38,14 @@ mcp_tutorial/
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/fak111/mcp_tutorial.git
 cd mcp_tutorial
 ```
 
 2. Install dependencies for each service:
+
 ```bash
 # Install client dependencies
 cd mcp-client
@@ -64,21 +57,39 @@ npm install
 ```
 
 3. Configure environment variables:
+
 - Create `.env` files in respective service directories
 - Set up necessary API keys and connection strings
 
 ## Running the Application
 
 1. Start the server:
+
 ```bash
 cd mcp-server
-npm start
+# if can node
+node ..js
 ```
 
 2. Start the client:
+
 ```bash
 cd mcp-client
-npm start
+# Create virtual environment
+uv venv
+
+# Activate virtual environment
+# On Windows:
+.venv\Scripts\activate
+# On Unix or MacOS:
+source .venv/bin/activate
+
+# Install required packages
+uv add mcp anthropic python-dotenv
+
+#run
+uv run client_no_api.py dumy.js
+
 ```
 
 ## Development
