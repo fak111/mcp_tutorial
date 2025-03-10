@@ -58,14 +58,32 @@ class MCPClient:
         print("\nMCP Command Client Started!")
         while True:
             try:
-                if (cmd := input("\nCommand (tools/exec <tool> <args>/quit): ").lower()) == 'quit':
+                raw_cmd = input("\nCommand (tools/exec <tool> <args>/quit): ")
+                # Only convert the command part to lowercase, not the arguments
+                if raw_cmd.lower() == 'quit':
                     break
-                elif cmd == 'tools':
+                elif raw_cmd.lower() == 'tools':
                     response = await self.session.list_tools()
                     print("\nAvailable tools:", [t.name for t in response.tools])
-                elif cmd.startswith('exec '):
-                    _, tool_name, *args = cmd.split(' ', 2)
-                    result = await self.session.call_tool(tool_name, {"args": args[-1] if args else {}})
+                elif raw_cmd.lower().startswith('exec '):
+                    # Split preserving case for arguments
+                    parts = raw_cmd.split(' ', 2)
+                    if len(parts) < 3:
+                        print("Error: Missing tool name or arguments")
+                        continue
+
+                    _, tool_name, arg = parts
+                    tool_name = tool_name.lower()  # tool name can be lowercase
+
+                    # Special handling for get_weather tool
+                    if tool_name == 'get_weather':
+                        # Format the city parameter correctly, preserving case
+                        params = {"city": arg.strip()}
+                    else:
+                        # Default handling for other tools
+                        params = {"args": arg}
+
+                    result = await self.session.call_tool(tool_name, params)
                     print(f"\nTool Result: {result.content}")
                 else:
                     print("Unknown command")

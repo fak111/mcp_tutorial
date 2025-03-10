@@ -4,28 +4,25 @@ This project is a microservices-based application that demonstrates various inte
 
 ## Project Structure
 
-```
 mcp_tutorial/
 ├── mcp-client/         # Client-side application
 ├── mcp-server/         # Server-side microservices
 │   ├── weather/        # Weather service
 │   └──filesystem/      # File management service
-├── dist/               # Compiled distribution files
 └── need/              # Additional resources
-```
 
 ## Features
 
 - Weather service integration
 - File management system
 - (ToDo))Multiple storage backend support:
-  - [ ] Redis
-  - [ ] PostgreSQL
-  - [ ] Memory storage
-  - [ ] Google Drive
-  - [ ] GitHub
-  - [ ] GitLab
-  - [ ] Slack integration
+  - [ ]  Redis
+  - [ ]  PostgreSQL
+  - [ ]  Memory storage
+  - [ ]  Google Drive
+  - [ ]  GitHub
+  - [ ]  GitLab
+  - [ ]  Slack integration
 - Modern client interface
 
 ## Prerequisites

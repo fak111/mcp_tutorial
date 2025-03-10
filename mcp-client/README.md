@@ -39,7 +39,7 @@ A Python-based client implementation for interacting with MCP (Model Control Pro
    ```
 3. run:
    ```bash
-   uv run client_no_api.py ../mcp-server/weather/src/index.js
+   uv run client_no_api.py ../mcp-server/weather/build/index.js
    ```
 
 ## Usage
@@ -49,26 +49,26 @@ A Python-based client implementation for interacting with MCP (Model Control Pro
 Run the client by providing the path to your MCP server script:
 
 ```bash
-python client_no_api.py <path_to_server_script>
+uv run client_no_api.py <path_to_server_script>
 ```
 
 ### Available Commands
 
 The client supports the following commands:
 
-1. List available tools:
+1. [ ]  List available tools:
 
    ```bash
    tools
    ```
-2. Execute a tool:
+2. [ ]  Execute a tool:
 
    ```bash
    exec <tool_name> <arguments>
    ```
 
    Arguments can be provided as a JSON string or simple text depending on the tool.
-3. Quit the client:
+3. [ ]  Quit the client:
 
    ```bash
    quit
@@ -81,7 +81,7 @@ The client supports the following commands:
 tools
 
 # Execute weather tool with city parameter
-exec get_weather London
+exec get_weather { "city": "London" }
 
 # Execute a tool with JSON parameters
 exec some_tool {"param1": "value1", "param2": "value2"}
