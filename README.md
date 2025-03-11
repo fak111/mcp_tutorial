@@ -1,4 +1,4 @@
-# aMCP Tutorial Project
+# MCP Tutorial Project
 
 This project is a microservices-based application that demonstrates various integrations and functionalities through a Model-Controller-Provider (MCP) architecture.
 
