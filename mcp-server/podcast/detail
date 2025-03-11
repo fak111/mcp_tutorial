@@ -1,0 +1,46 @@
+ curl --location --request POST 'https://api.coze.cn/v3/chat' \             ─╯
+--header 'Authorization: Bearer pat_eOi2JPFJqxfcDr5ssao2G3tWx9VqTv5HhvK4hPBBHkVktuXT92sqYCXNyjdbtyhA' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "bot_id": "7480425426293473280",
+    "user_id": "123",
+    "stream": true,
+    "auto_save_history": true,
+    "additional_messages": [
+        {
+            "role": "user",
+            "content": "帮我生成一个小男孩和小女孩的播客",
+            "content_type": "text"
+        }
+    ]
+}'
+event:conversation.chat.created
+data:{"id":"7480537182273486860","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","created_at":1741698288,"last_error":{"code":0,"msg":""},"status":"created","usage":{"token_count":0,"output_count":0,"input_count":0},"section_id":"7480537182273470476"}
+
+event:conversation.chat.in_progress
+data:{"id":"7480537182273486860","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","created_at":1741698288,"last_error":{"code":0,"msg":""},"status":"in_progress","usage":{"token_count":0,"output_count":0,"input_count":0},"section_id":"7480537182273470476"}
+
+event:conversation.message.completed
+data:{"id":"7480537203874054163","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","role":"assistant","type":"function_call","content":"{\"name\":\"ts-url2PodcastTwoPerson_1_760-url2PodcastTwoPerson_1_760\",\"arguments\":{\"user_input\":\"小男孩和小女孩的播客\"},\"plugin_id\":7480421749763620883,\"plugin_name\":\"url2PodcastTwoPerson_1_760\",\"api_id\":7480421749763637267,\"api_name\":\"url2PodcastTwoPerson_1_760\",\"plugin_type\":4,\"plugin\":\"url2PodcastTwoPerson_1_760\"}","content_type":"text","chat_id":"7480537182273486860","section_id":"7480537182273470476","created_at":1741698293,"updated_at":1741698293}
+
+event:conversation.message.completed
+data:{"id":"7480537328306405430","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","role":"assistant","type":"tool_response","content":"https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/6625fe1f-11ab-46bb-aa23-ae130c310ab8.mp3","content_type":"text","chat_id":"7480537182273486860","section_id":"7480537182273470476","created_at":1741698322,"updated_at":1741698322}
+
+event:conversation.message.delta
+data:{"id":"7480537203874037779","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","role":"assistant","type":"answer","content":"https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/6625fe1f-11ab-46bb-aa23-ae130c310ab8.mp3","content_type":"text","chat_id":"7480537182273486860","section_id":"7480537182273470476","created_at":1741698322}
+
+event:conversation.message.completed
+data:{"id":"7480537203874037779","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","role":"assistant","type":"answer","content":"https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/6625fe1f-11ab-46bb-aa23-ae130c310ab8.mp3","content_type":"text","chat_id":"7480537182273486860","section_id":"7480537182273470476","created_at":1741698322}
+
+event:conversation.message.completed
+data:{"id":"7480537328306438198","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","role":"assistant","type":"verbose","content":"{\"msg_type\":\"generate_answer_finish\",\"data\":\"{\\\"finish_reason\\\":0,\\\"FinData\\\":\\\"\\\"}\",\"from_module\":null,\"from_unit\":null}","content_type":"text","chat_id":"7480537182273486860","section_id":"7480537182273470476","created_at":1741698322,"updated_at":1741698322}
+
+event:conversation.chat.completed
+data:{"id":"7480537182273486860","conversation_id":"7480537182273470476","bot_id":"7480425426293473280","created_at":1741698288,"completed_at":1741698322,"last_error":{"code":0,"msg":""},"status":"completed","usage":{"token_count":689,"output_count":123,"input_count":143},"section_id":"7480537182273470476"}
+
+event:done
+data:"[DONE]"
+
+ ~ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 34s  base   09:05:21 下午 ─╮
+❯
+mcp server 模拟发送过程最后只要返回一个链接就是https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/这个链接

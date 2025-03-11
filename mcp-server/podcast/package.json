@@ -1,0 +1,44 @@
+{
+    "name": "@fak111/podcast-mcp",
+    "version": "1.0.0",
+    "description": "A simple podcast generation MCP service",
+    "main": "build/index.js",
+    "type": "module",
+    "bin": {
+        "podcast-mcp": "build/index.js"
+    },
+    "scripts": {
+        "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+        "start": "node build/index.js"
+    },
+    "files": [
+        "build"
+    ],
+    "keywords": [
+        "mcp",
+        "podcast",
+        "cli"
+    ],
+    "author": "fak111",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^22.10.0",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.6.1",
+        "node-fetch": "^3.3.2",
+        "zod": "^3.24.2"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fak111/mcp_tutorial.git"
+    },
+    "bugs": {
+        "url": "https://github.com/fak111/mcp_tutorial/issues"
+    },
+    "homepage": "https://github.com/fak111/mcp_tutorial#readme"
+}
