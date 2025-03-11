@@ -1,28 +1,32 @@
-# MCP Tutorial Project
+# aMCP Tutorial Project
 
 This project is a microservices-based application that demonstrates various integrations and functionalities through a Model-Controller-Provider (MCP) architecture.
 
 ## Project Structure
 
+```
 mcp_tutorial/
-├── mcp-client/         # Client-side application
-├── mcp-server/         # Server-side microservices
-│   ├── weather/        # Weather service
-│   └──filesystem/      # File management service
-└── need/              # Additional resources
+├── mcp-client/           # Client-side application
+├── mcp-server/          # Server-side microservices
+│   ├── podcast/         # Podcast service
+│   ├── weather/         # Weather service
+│   └── filesystem/      # File management service
+└── need/                # Additional resources and utilities
+```
 
 ## Features
 
 - Weather service integration
 - File management system
+- Podcast generate by Coze api
 - (ToDo))Multiple storage backend support:
-  - [ ]  Redis
-  - [ ]  PostgreSQL
-  - [ ]  Memory storage
-  - [ ]  Google Drive
-  - [ ]  GitHub
-  - [ ]  GitLab
-  - [ ]  Slack integration
+  - [ ] Redis
+  - [ ] PostgreSQL
+  - [ ] Memory storage
+  - [ ] Google Drive
+  - [ ] GitHub
+  - [ ] GitLab
+  - [ ] Slack integration
 - Modern client interface
 
 ## Prerequisites
