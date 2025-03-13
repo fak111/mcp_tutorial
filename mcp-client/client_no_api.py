@@ -79,6 +79,8 @@ class MCPClient:
                     if tool_name == 'get_weather':
                         # Format the city parameter correctly, preserving case
                         params = {"city": arg.strip()}
+                    elif tool_name == 'get_podcast':
+                        params = {"prompt": arg.strip()}
                     else:
                         # Default handling for other tools
                         params = {"args": arg}
