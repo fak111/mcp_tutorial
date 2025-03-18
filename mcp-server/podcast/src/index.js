@@ -5,8 +5,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import fetch from 'node-fetch';
 
-const COZE_API_URL = 'https://api.coze.cn/v3/chat';
-const COZE_BOT_ID = '7480425426293473280';
+const COZE_API_URL = 'https://api.coze.cn/v1/workflow/run';
+const COZE_WORKFLOW_ID = '7480421707456397348';
 const COZE_API_KEY = 'pat_eOi2JPFJqxfcDr5ssao2G3tWx9VqTv5HhvK4hPBBHkVktuXT92sqYCXNyjdbtyhA';
 
 // Create MCP server
@@ -14,48 +14,6 @@ const server = new McpServer({
     name: "Podcast Generation Server",
     version: "1.0.0"
 });
-
-// Helper function to extract podcast URL from streaming response
-async function extractPodcastUrl(response) {
-    const reader = response.body.getReader();
-    let podcastUrl = null;
-
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        // Convert the chunk to text
-        const chunk = new TextDecoder().decode(value);
-        const lines = chunk.split('\n');
-
-        for (const line of lines) {
-            if (!line.trim()) continue;
-
-            // Parse event and data
-            const [eventPart, dataPart] = line.split('data:').map(part => part.trim());
-            if (!dataPart) continue;
-
-            try {
-                const data = JSON.parse(dataPart);
-
-                // Look for the message with the podcast URL
-                if (data.type === 'tool_response' && data.content) {
-                    if (data.content.startsWith('https://lf-bot-studio-plugin-resource.coze.cn')) {
-                        podcastUrl = data.content;
-                        break;
-                    }
-                }
-            } catch (e) {
-                // Skip invalid JSON
-                continue;
-            }
-        }
-
-        if (podcastUrl) break;
-    }
-
-    return podcastUrl;
-}
 
 // Define the podcast tool using zod schema for type safety
 server.tool(
@@ -82,17 +40,12 @@ server.tool(
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    bot_id: COZE_BOT_ID,
-                    user_id: "123",
-                    stream: true,
-                    auto_save_history: true,
-                    additional_messages: [
-                        {
-                            role: "user",
-                            content: params.prompt,
-                            content_type: "text"
-                        }
-                    ]
+                    workflow_id: COZE_WORKFLOW_ID,
+                    parameters: {
+                        user_id: "12345",
+                        user_name: "User",
+                        user_input: params.prompt
+                    }
                 })
             });
 
@@ -100,7 +53,15 @@ server.tool(
                 throw new Error(`API request failed with status ${response.status}`);
             }
 
-            const podcastUrl = await extractPodcastUrl(response);
+            const result = await response.json();
+
+            if (result.code !== 0) {
+                throw new Error(`API returned error code ${result.code}: ${result.msg}`);
+            }
+
+            // Parse the data string which contains the podcast URL
+            const data = JSON.parse(result.data);
+            const podcastUrl = data.data;
 
             if (!podcastUrl) {
                 throw new Error("Failed to generate podcast URL");

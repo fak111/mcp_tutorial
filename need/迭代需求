@@ -1,3 +1,7 @@
+
+uv run client_no_api.py ../mcp-server/gmail/build/index.js
+
+uv run client_no_api.py  /Users/zhangbeibei/code/github/mcp-send-email/mcp/build/index.js
 3-9
 1.
 @https://modelcontextprotocol.io/quickstart/client  @mcp
