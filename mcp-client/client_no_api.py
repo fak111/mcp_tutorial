@@ -1,10 +1,16 @@
 import asyncio
 import sys
+import os
 from typing import Optional
 from contextlib import AsyncExitStack
+from dotenv import load_dotenv
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+
+load_dotenv()  # Load environment variables from .env
+
+NODE_PATH = "/opt/homebrew/bin/node"  # Full path to node executable
 
 class MCPClient:
     def __init__(self):
@@ -16,11 +22,15 @@ class MCPClient:
         if not (server_script_path.endswith('.py') or server_script_path.endswith('.js')):
             raise ValueError("Server script must be a .py or .js file")
 
-        command = "python" if server_script_path.endswith('.py') else "node"
+        command = "python" if server_script_path.endswith('.py') else NODE_PATH
         server_params = StdioServerParameters(
             command=command,
             args=[server_script_path],
-            env=None
+            env={
+                "GOOGLE_CLIENT_ID": os.getenv("GOOGLE_CLIENT_ID"),
+                "GOOGLE_CLIENT_SECRET": os.getenv("GOOGLE_CLIENT_SECRET"),
+                "PATH": os.environ.get("PATH", "")  # Pass the current PATH
+            }
         )
 
         stdio_transport = await self.exit_stack.enter_async_context(stdio_client(server_params))
@@ -81,6 +91,14 @@ class MCPClient:
                         params = {"city": arg.strip()}
                     elif tool_name == 'get_podcast':
                         params = {"prompt": arg.strip()}
+                    elif tool_name == 'send_email':
+                        # Try to parse the argument as JSON
+                        try:
+                            import json
+                            params = json.loads(arg)
+                        except json.JSONDecodeError:
+                            print("Error: Invalid JSON format for email parameters")
+                            continue
                     else:
                         # Default handling for other tools
                         params = {"args": arg}
