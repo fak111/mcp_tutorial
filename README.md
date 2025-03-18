@@ -1,117 +1,140 @@
-# MCP Tutorial Project
+# MCP 教程项目
 
-This project is a microservices-based application that demonstrates various integrations and functionalities through a Model-Controller-Provider (MCP) architecture.
+本项目是一个基于微服务架构的应用程序，通过模型-控制器-提供者（MCP）架构展示各种集成功能。
 
-## Project Structure
+[中文](README.md) | [English](README_en.md)
+
+📺 [在 Bilibili 观看教程视频](https://space.bilibili.com/1617153613?spm_id_from=333.33.0.0)
+
+## 项目结构
 
 ```
 mcp_tutorial/
-├── mcp-client/           # Client-side application
-├── mcp-server/          # Server-side microservices
-│   ├── podcast/         # Podcast service
-│   ├── weather/         # Weather service
-│   └── filesystem/      # File management service
-└── need/                # Additional resources and utilities
+├── mcp-client/           # 客户端应用
+├── mcp-server/          # 服务端微服务
+│   ├── podcast/         # 播客服务
+│   ├── weather/         # 天气服务
+│   ├── gmail/           # Gmail服务
+│   └── filesystem/      # 文件管理服务
+└── need/                # 附加资源和工具
 ```
 
-## Features
+## 功能特性
 
-- Weather service integration
-- File management system
-- Podcast generate by Coze api
-- (ToDo))Multiple storage backend support:
+- 多语言支持（英文/中文）
+- 天气服务集成
+- 文件管理系统
+- 基于Coze API的播客生成
+- Gmail服务集成：
+  - 发送和接收邮件
+  - 邮件通知
+  - 附件处理
+- (待开发)多存储后端支持：
   - [ ] Redis
   - [ ] PostgreSQL
-  - [ ] Memory storage
+  - [ ] 内存存储
   - [ ] Google Drive
   - [ ] GitHub
   - [ ] GitLab
-  - [ ] Slack integration
-- Modern client interface
+  - [ ] Slack集成
+- 现代化客户端界面
 
-## Prerequisites
+## 环境要求
 
-- Node.js (v14 or higher)
-- npm or yarn
-- Redis (optional)
-- PostgreSQL (optional)
+- Node.js (v14或更高版本)
+- npm或yarn
+- Redis (可选)
+- PostgreSQL (可选)
+- Google Cloud Platform账户 (用于Gmail API)
 
-## Installation
+## 安装说明
 
-1. Clone the repository:
+1. 克隆仓库：
 
 ```bash
 git clone https://github.com/fak111/mcp_tutorial.git
 cd mcp_tutorial
 ```
 
-2. Install dependencies for each service:
+2. 安装各服务依赖：
 
 ```bash
-# Install client dependencies
+# 安装客户端依赖
 cd mcp-client
 npm install
 
-# Install server dependencies
+# 安装服务端依赖
 cd ../mcp-server
 npm install
 ```
 
-3. Configure environment variables:
+3. 配置环境变量：
 
-- Create `.env` files in respective service directories
-- Set up necessary API keys and connection strings
+- 在相应的服务目录中创建`.env`文件
+- 设置必要的API密钥和连接字符串
+- 配置Gmail API凭据：
+  - 在Google Cloud Console中创建项目
+  - 启用Gmail API
+  - 设置OAuth 2.0凭据
+  - 将凭据添加到`.env`文件中
 
-## Running the Application
+## 运行应用
 
-1. Start the server:
+1. 启动服务器：
 
 ```bash
 cd mcp-server
-# if can node
+# 如果可以使用node
 node ..js
 ```
 
-2. Start the client:
+2. 启动客户端：
 
 ```bash
 cd mcp-client
-# Create virtual environment
+# 创建虚拟环境
 uv venv
 
-# Activate virtual environment
-# On Windows:
+# 激活虚拟环境
+# Windows系统：
 .venv\Scripts\activate
-# On Unix or MacOS:
+# Unix或MacOS系统：
 source .venv/bin/activate
 
-# Install required packages
-uv add mcp anthropic python-dotenv
+# 安装所需包
+uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib
 
-#run
+# 运行
 uv run client_no_api.py dumy.js
-
 ```
 
-## Development
+## 语言支持
 
-- The project uses TypeScript for type safety
-- Each service can be developed and deployed independently
-- Follow the microservices architecture pattern
+应用程序支持英文和中文两种语言。您可以通过用户界面中的语言选择器切换语言。所有文档都提供两种语言版本：
 
-## Contributing
+- 英文：README.md
+- 中文：README_zh.md
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 开发说明
 
-## License
+- 项目使用TypeScript确保类型安全
+- 每个服务可以独立开发和部署
+- 遵循微服务架构模式
+- 支持i18n多语言实现
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 贡献指南
 
-## Acknowledgments
+1. Fork本仓库
+2. 创建特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m '添加某个很棒的特性'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 创建Pull Request
 
-- Thanks to all contributors
-- Built with modern web technologies and best practices
+## 许可证
+
+本项目基于MIT许可证 - 详情请查看LICENSE文件。
+
+## 致谢
+
+- 感谢所有贡献者
+- 使用现代网络技术和最佳实践构建
