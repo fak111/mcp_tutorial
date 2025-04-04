@@ -16,6 +16,13 @@ dist/
 *.swp
 *.swo
 .DS_Store
+*.password
+
+# 敏感文件
+**/password.py
+**/password
+**/*.key
+**/*secret*
 
 # Logs
 *.log
