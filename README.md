@@ -55,10 +55,7 @@ cd mcp-client
 cp .env.example .env
 ```
 
-- 在相应的服务目录中创建 `.env`文件
-
-
-
+- 在相应的服务目录中创建 `.env`文件,填写 `API_KEY`
 
 3. 启动
 
@@ -66,18 +63,36 @@ cp .env.example .env
 cd mcp-client
 # 创建虚拟环境
 uv venv
-
 # 激活虚拟环境
 # Windows系统：
 .venv\Scripts\activate
 # Unix或MacOS系统：
 source .venv/bin/activate
-
 # 安装所需包
 uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib 'httpx[socks]' openai
-
-# 运行
+```
+4. 运行
+```bash
+# 天气
 uv run client_interns1.py ../mcp-server/weather/build/index.js
+# 文件
+uv run client_interns1.py ../mcp-server/filesystem/dist/index.js /Users/zhangbeibei/code/github/mcp_tutorial
+
+
+uv run client_fixed.py ../mcp-server/filesystem/dist/index.js ../
+
+# 使用方法
+# 列出目录
+列出当前目录下的所有文件
+
+# 读取文件
+读取 README.md 文件的内容
+
+# 创建文件
+创建一个名为 test.txt 的文件，内容为 "Hello World"
+
+# 搜索文件
+搜索所有 .md 文件
 ```
 
 ## 语言支持
