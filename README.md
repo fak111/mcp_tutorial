@@ -16,7 +16,7 @@ mcp_tutorial/
 │   ├── weather/         # 天气服务
 │   ├── gmail/           # Gmail服务
 │   └── filesystem/      # 文件管理服务
-└── need/                # 附加资源和工具
+└── README.md            # 说明文档
 ```
 
 ## 功能特性
@@ -39,15 +39,7 @@ mcp_tutorial/
   - [ ] Slack集成
 - 现代化客户端界面
 
-## 环境要求
-
-- Node.js (v14或更高版本)
-- npm或yarn
-- Redis (可选)
-- PostgreSQL (可选)
-- Google Cloud Platform账户 (用于Gmail API)
-
-## 安装说明
+## 快速开始
 
 1. 克隆仓库：
 
@@ -56,39 +48,19 @@ git clone https://github.com/fak111/mcp_tutorial.git
 cd mcp_tutorial
 ```
 
-2. 安装各服务依赖：
+2. 配置 api（推荐学习时用书生的s1 模型 [https://internlm.intern-ai.org.cn/api/strategy](书生)）：
 
 ```bash
-# 安装客户端依赖
 cd mcp-client
-npm install
-
-# 安装服务端依赖
-cd ../mcp-server
-npm install
+cp .env.example .env
 ```
-
-3. 配置环境变量：
 
 - 在相应的服务目录中创建 `.env`文件
-- 设置必要的API密钥和连接字符串
-- 配置Gmail API凭据：
-  - 在Google Cloud Console中创建项目
-  - 启用Gmail API
-  - 设置OAuth 2.0凭据
-  - 将凭据添加到 `.env`文件中
 
-## 运行应用
 
-1. 启动服务器：
 
-```bash
-cd mcp-server
-# 如果可以使用node
-node ..js
-```
 
-2. 启动客户端：
+3. 启动
 
 ```bash
 cd mcp-client
@@ -105,7 +77,7 @@ source .venv/bin/activate
 uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib 'httpx[socks]' openai
 
 # 运行
-uv run client.py dumy.js
+uv run client_interns1.py ../mcp-server/weather/build/index.js
 ```
 
 ## 语言支持
@@ -114,13 +86,6 @@ uv run client.py dumy.js
 
 - 英文：README.md
 - 中文：README_zh.md
-
-## 开发说明
-
-- 项目使用TypeScript确保类型安全
-- 每个服务可以独立开发和部署
-- 遵循微服务架构模式
-- 支持i18n多语言实现
 
 ## 贡献指南
 
@@ -133,22 +98,3 @@ uv run client.py dumy.js
 ## 许可证
 
 本项目基于MIT许可证 - 详情请查看LICENSE文件。
-
-## 致谢
-
-- 感谢所有贡献者
-- 使用现代网络技术和最佳实践构建
-
-## 安全提示
-
-### 敏感信息处理
-
-为确保安全性，本项目中的敏感信息（如API密钥、客户端密钥等）不应直接存储在代码库中。请按照以下步骤操作：
-
-1. 复制各目录下的 `.env.example`文件为 `.env`，并填入您的实际密钥
-2. 复制 `password.py.example`文件为 `password.py`，并填入您的API密钥
-3. 复制示例JS/TS文件（如 `index.example.js`）并按照文件中的说明填入敏感信息
-
-所有包含实际密钥的文件已添加到 `.gitignore`中，确保不会意外上传到公共仓库。
-
-⚠️ **警告**: 永远不要将包含真实密钥的文件提交到代码库中，即使是私有仓库也要谨慎处理。

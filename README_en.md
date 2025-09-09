@@ -16,7 +16,7 @@ mcp_tutorial/
 │   ├── weather/         # Weather service
 │   ├── gmail/           # Gmail service
 │   └── filesystem/      # File management service
-└── need/                # Additional resources and utilities
+└── README.md            # README
 ```
 
 ## Features
@@ -56,39 +56,18 @@ git clone https://github.com/fak111/mcp_tutorial.git
 cd mcp_tutorial
 ```
 
-2. Install dependencies for each service:
+2. configure api server (recommand free intern-s1: [https://internlm.intern-ai.org.cn/api/strategy](书生)):
 
 ```bash
-# Install client dependencies
 cd mcp-client
-npm install
-
-# Install server dependencies
-cd ../mcp-server
-npm install
+cp .env.example .env
 ```
 
-3. Configure environment variables:
 
-- Create `.env` files in respective service directories
-- Set up necessary API keys and connection strings
-- Configure Gmail API credentials:
-  - Create a project in Google Cloud Console
-  - Enable Gmail API
-  - Set up OAuth 2.0 credentials
-  - Add credentials to `.env` file
 
-## Running the Application
+3. Start the client:
 
-1. Start the server:
 
-```bash
-cd mcp-server
-# if can node
-node ..js
-```
-
-2. Start the client:
 
 ```bash
 cd mcp-client
@@ -101,13 +80,12 @@ uv venv
 # On Unix or MacOS:
 source .venv/bin/activate
 
-# Install required packages
-uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib
+# install required pageage
+uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib 'httpx[socks]' openai
 
 #run
-uv run client_no_api.py dumy.js
+uv run client_interns1.py ../mcp-server/weather/build/index.js
 ```
-
 ## Language Support
 
 The application supports both English and Chinese languages. You can switch between languages using the language selector in the user interface. All documentation is available in both languages:
@@ -134,7 +112,3 @@ The application supports both English and Chinese languages. You can switch betw
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-
-- Thanks to all contributors
-- Built with modern web technologies and best practices
