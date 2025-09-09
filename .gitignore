@@ -2,7 +2,7 @@
 node_modules/
 **/token.json
 # Build output
-build/
+# build/
 dist/
 
 # Environment variables
