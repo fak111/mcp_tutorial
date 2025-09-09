@@ -35,7 +35,7 @@ A Python-based client implementation for interacting with MCP (Model Control Pro
    source .venv/bin/activate
 
    # Install required packages
-   uv add mcp anthropic python-dotenv
+   uv add mcp anthropic python-dotenv 'httpx[socks]' openai
    ```
 3. run:
    ```bash
@@ -56,23 +56,23 @@ uv run client_no_api.py <path_to_server_script>
 
 The client supports the following commands:
 
-1. [ ]  List available tools:
+1. [ ] List available tools:
 
-   ```bash
-   tools
-   ```
-2. [ ]  Execute a tool:
+    ```bash
+    tools
+    ```
+2. [ ] Execute a tool:
 
-   ```bash
-   exec <tool_name> <arguments>
-   ```
+    ```bash
+    exec <tool_name> <arguments>
+    ```
 
-   Arguments can be provided as a JSON string or simple text depending on the tool.
-3. [ ]  Quit the client:
+    Arguments can be provided as a JSON string or simple text depending on the tool.
+3. [ ] Quit the client:
 
-   ```bash
-   quit
-   ```
+    ```bash
+    quit
+    ```
 
 ### Examples
 

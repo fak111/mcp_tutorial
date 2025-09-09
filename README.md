@@ -70,13 +70,13 @@ npm install
 
 3. 配置环境变量：
 
-- 在相应的服务目录中创建`.env`文件
+- 在相应的服务目录中创建 `.env`文件
 - 设置必要的API密钥和连接字符串
 - 配置Gmail API凭据：
   - 在Google Cloud Console中创建项目
   - 启用Gmail API
   - 设置OAuth 2.0凭据
-  - 将凭据添加到`.env`文件中
+  - 将凭据添加到 `.env`文件中
 
 ## 运行应用
 
@@ -102,10 +102,10 @@ uv venv
 source .venv/bin/activate
 
 # 安装所需包
-uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib
+uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib 'httpx[socks]' openai
 
 # 运行
-uv run client_no_api.py dumy.js
+uv run client.py dumy.js
 ```
 
 ## 语言支持
@@ -145,17 +145,10 @@ uv run client_no_api.py dumy.js
 
 为确保安全性，本项目中的敏感信息（如API密钥、客户端密钥等）不应直接存储在代码库中。请按照以下步骤操作：
 
-1. 复制各目录下的`.env.example`文件为`.env`，并填入您的实际密钥
-2. 复制`password.py.example`文件为`password.py`，并填入您的API密钥
-3. 复制示例JS/TS文件（如`index.example.js`）并按照文件中的说明填入敏感信息
+1. 复制各目录下的 `.env.example`文件为 `.env`，并填入您的实际密钥
+2. 复制 `password.py.example`文件为 `password.py`，并填入您的API密钥
+3. 复制示例JS/TS文件（如 `index.example.js`）并按照文件中的说明填入敏感信息
 
-所有包含实际密钥的文件已添加到`.gitignore`中，确保不会意外上传到公共仓库。
+所有包含实际密钥的文件已添加到 `.gitignore`中，确保不会意外上传到公共仓库。
 
 ⚠️ **警告**: 永远不要将包含真实密钥的文件提交到代码库中，即使是私有仓库也要谨慎处理。
-
-### 密钥轮换
-
-定期轮换您的API密钥，尤其是在以下情况下：
-- 怀疑密钥可能已泄露
-- 项目协作者离开团队
-- 经过较长时间未更改（建议至少每90天轮换一次）
