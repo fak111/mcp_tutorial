@@ -59,7 +59,9 @@ echo "✅ 文件系统 MCP 安装完成"
 # 9. 安装 MCP 客户端依赖
 echo "💻 安装 MCP 客户端依赖..."
 cd ../../mcp-client
-
+uv venv
+# Unix或MacOS系统：
+source .venv/bin/activate
 # 使用清华镜像安装依赖
 UV_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple uv add \
   mcp \
