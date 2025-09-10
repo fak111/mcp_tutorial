@@ -1,3 +1,4 @@
+
 # MCP 教程项目
 
 本项目是一个基于微服务架构的应用程序，通过模型-控制器-提供者（MCP）架构展示各种集成功能。
@@ -71,18 +72,24 @@ source .venv/bin/activate
 # 安装所需包
 uv add mcp anthropic python-dotenv google-api-python-client google-auth-oauthlib 'httpx[socks]' openai
 ```
+
 4. 运行
+
 ```bash
 # 天气
 uv run client_interns1.py ../mcp-server/weather/build/index.js
-# 文件
-uv run client_interns1.py ../mcp-server/filesystem/dist/index.js /Users/zhangbeibei/code/github/mcp_tutorial
+# 用法
+Beijing天气怎么样
 
-
+Tokyo风速是多少
+```
+---
+```bash
+#文件
 uv run client_fixed.py ../mcp-server/filesystem/dist/index.js ../
 
-# 使用方法
-# 列出目录
+# 用法
+
 列出当前目录下的所有文件
 
 # 读取文件
