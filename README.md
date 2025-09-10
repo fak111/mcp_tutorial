@@ -5,7 +5,7 @@
 
 [中文](README.md) | [English](README_en.md)
 
-📺 [在 Bilibili 观看教程视频](https://space.bilibili.com/1617153613?spm_id_from=333.33.0.0)
+📺 [在 Bilibili 观看教程视频]( https://www.bilibili.com/video/BV1ULZZYcE84/?share_source=copy_web&vd_source=fed0463c5e2f2a5d15192f02da148180)
 
 ## 项目结构
 
@@ -17,6 +17,7 @@ mcp_tutorial/
 │   ├── weather/         # 天气服务
 │   ├── gmail/           # Gmail服务
 │   └── filesystem/      # 文件管理服务
+└── install.sh           # linux 一键安装环境脚本
 └── README.md            # 说明文档
 ```
 
@@ -30,15 +31,7 @@ mcp_tutorial/
   - 发送和接收邮件
   - 邮件通知
   - 附件处理
-- (待开发)多存储后端支持：
-  - [ ] Redis
-  - [ ] PostgreSQL
-  - [ ] 内存存储
-  - [ ] Google Drive
-  - [ ] GitHub
-  - [ ] GitLab
-  - [ ] Slack集成
-- 现代化客户端界面
+- (待开发)现代化客户端界面
 
 ## 快速开始
 
