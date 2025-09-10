@@ -59,7 +59,17 @@ echo "✅ 文件系统 MCP 安装完成"
 # 9. 安装 MCP 客户端依赖
 echo "💻 安装 MCP 客户端依赖..."
 cd ../../mcp-client
-uv pip install -r requirements.txt
+
+# 使用清华镜像安装依赖
+UV_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple uv add \
+  mcp \
+  anthropic \
+  python-dotenv \
+  google-api-python-client \
+  google-auth-oauthlib \
+  'httpx[socks]' \
+  openai
+
 echo "✅ MCP 客户端依赖安装完成"
 
 # 10. 返回初始目录
