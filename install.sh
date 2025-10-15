@@ -31,30 +31,32 @@ echo "📦 安装 pnpm..."
 npm install -g pnpm --registry=https://registry.npmmirror.com
 echo "pnpm 版本: $(pnpm --version)"
 
-# 5. 安装 uv
-echo "🚀 安装 uv..."
-curl -LsSf https://astral.sh/uv/install.sh | sh
-echo "✅ uv 安装完成"
 
-# 6. 配置 uv 环境变量
+# 5. 配置 uv 环境变量
 echo "⚙️ 配置 uv 环境变量..."
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 echo "uv 版本: $(uv --version)"
 
-# 7. 安装天气 MCP 服务器
+# 6. 安装天气 MCP 服务器
 echo "⛅ 安装天气 MCP 服务器..."
 cd mcp-server/weather
 pnpm install --registry=https://registry.npmmirror.com
 pnpm run build
 echo "✅ 天气 MCP 安装完成"
 
-# 8. 安装文件系统 MCP 服务器
+# 7. 安装文件系统 MCP 服务器
 echo "📁 安装文件系统 MCP 服务器..."
 cd ../filesystem
 pnpm install --registry=https://registry.npmmirror.com
 pnpm run build
 echo "✅ 文件系统 MCP 安装完成"
+
+
+# 8. 安装 uv
+echo "🚀 安装 uv..."
+pip install uv
+echo "✅ uv 安装完成"
 
 # 9. 安装 MCP 客户端依赖
 echo "💻 安装 MCP 客户端依赖..."
